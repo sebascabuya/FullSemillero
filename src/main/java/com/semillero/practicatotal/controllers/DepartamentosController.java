@@ -34,6 +34,12 @@ public class DepartamentosController {
 		return departamentosRepository.findAll();
 	}
 	
+	@GetMapping(value="/consultardepartamentobyid/{departamentoId}")
+	public DepartamentosEntity obtenerDepartamentoById(@PathVariable(value="departamentoId") Integer departamentoId){
+		Optional<DepartamentosEntity> departamentosEntity = departamentosRepository.findById(departamentoId);
+		return departamentosEntity.get();
+	}
+	
 	@PostMapping(value="/ingresardepartamento", consumes = "application/json")
 	public DepartamentosEntity crearDepartamento(@RequestBody DepartamentosEntity departamentosEntity) {
 		departamentos = departamentosRepository.saveAndFlush(departamentosEntity);
