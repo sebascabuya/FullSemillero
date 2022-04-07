@@ -1,12 +1,15 @@
 package com.semillero.practicatotal.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.semillero.practicatotal.entidades.DepartamentosEntity;
-import com.semillero.practicatotal.repositories.DepartamentosRepository;
+import com.semillero.practicatotal.entidades.CiudadesEntity;
+import com.semillero.practicatotal.repositories.CiudadesRepository;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -14,7 +17,12 @@ import com.semillero.practicatotal.repositories.DepartamentosRepository;
 public class CiudadesController {
 
 	@Autowired
-	private DepartamentosRepository departamentosRepository;
+	private CiudadesRepository ciudadesRepository;
 	
-	private DepartamentosEntity departamentosEntity;
+	//private CiudadesEntity ciudadesEntity;
+	
+	@GetMapping("/listaciudades")
+	public List<CiudadesEntity> obtenerListaCiudades(){
+		return ciudadesRepository.findAll();
+	}
 }
