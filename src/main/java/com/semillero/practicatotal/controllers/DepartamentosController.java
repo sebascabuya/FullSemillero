@@ -50,12 +50,8 @@ public class DepartamentosController {
 	public ResponseEntity<DepartamentosEntity> editarDepartamento(@PathVariable(value="departamentoId") Integer departamentoId, @RequestBody DepartamentosEntity departamentosBody) {
 		Optional<DepartamentosEntity> departamentosEntity = departamentosRepository.findById(departamentoId);
 		if(departamentosEntity.isPresent()) {
-			if(departamentosBody.getStrCodigoDaneDepartamento() != null) {
-				departamentosEntity.get().setStrCodigoDaneDepartamento(departamentosBody.getStrCodigoDaneDepartamento());
-			} 
-			if(departamentosBody.getStrNombreDepartamento() != null) {
-				departamentosEntity.get().setStrNombreDepartamento(departamentosBody.getStrNombreDepartamento());
-			}
+			departamentosEntity.get().setStrCodigoDaneDepartamento(departamentosBody.getStrCodigoDaneDepartamento());
+			departamentosEntity.get().setStrNombreDepartamento(departamentosBody.getStrNombreDepartamento());
 			return ResponseEntity.status(HttpStatus.CREATED).body(departamentosRepository.save(departamentosEntity.get()));
 		} else {
 			return ResponseEntity.notFound().build();
