@@ -1,7 +1,12 @@
 package com.semillero.practicatotal.controllers;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,4 +22,15 @@ public class OficinasController {
 	private OficinasRepository oficinasRepository;
 	
 	private OficinasEntity oficinasEntity;
+	
+	@GetMapping("/listaoficinas")
+	public List<OficinasEntity> obtenerListaOficinas() {
+		return oficinasRepository.findAll();
+	}
+	
+	@GetMapping("/oficinabyid/{oficinaId}")
+	public OficinasEntity obtenerOficinaById(@PathVariable(value="oficinaId") Integer oficinaId){
+		Optional<OficinasEntity> oficinasOptional = oficinasRepository.findById(oficinaId);
+		return oficinasOptional.get();
+	}
 }
